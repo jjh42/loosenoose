@@ -1,0 +1,9 @@
+This a python program for solving hangman. Its designed to be hosted on Google App Engine.
+
+The basic premise is that you give it the clue's you have by entering the partial word with - for unknown letters. It finds the English words which could match and calculates the probability distribution of the unknown letters across this set. It could be improved, for instance, by learning individual player habits.
+
+Its just a toy for fun.
+
+It assumes that when you guess a letter you are given all the instances of the letter in the word. This means, words which additionally occurences of a specified letter are excluded.
+
+Copyright (2011) Jonathan Hunt <jjh@42quarks.com>. License under Apache License v2.
