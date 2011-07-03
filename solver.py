@@ -12,6 +12,7 @@ class Dictionary():
         self.word = self._preprocess(word)
         self._load_dict()
         self._match_words()
+        self._guess()
 
     def _preprocess(self, word):
         """Return the word in standard, canonical form."""
@@ -37,3 +38,25 @@ class Dictionary():
         reobj = re.compile(self.word.replace('?', not_existing_letters))
         self.matching_words = filter(lambda s: reobj.match(s) != None, self.word_list)
 
+    def _guess(self):
+        """Iterate through all the matches to find the distribution of letters."""
+        letter_predictions = {}
+        # Count the number of words each letter occurs in
+        currentletters = set(self.word)
+        for w in self.matching_words:
+            # Ignore occurences of known letters
+            letters = set(w); letters.difference_update(currentletters)
+            for l in letters:
+                try:
+                    letter_predictions[l] += 1
+                except KeyError:
+                    letter_predictions[l] = 1
+        # Turn the prediction dictionary into an ordered list from
+        # most likley to least like.
+        self.predictions = letter_predictions.items()
+        self.predictions.sort(cmp=lambda x,y: -cmp(x[1], y[1]))
+        # self.predictions is now an ordered list of tuples from most to least likely.
+        # ('letter', number).
+        # Normalize number of occurences to a fraction.
+        self.predictions = map(lambda x: (x[0], float(x[1]/len(self.matching_words))),
+                                          self.predictions)

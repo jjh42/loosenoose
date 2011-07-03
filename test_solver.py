@@ -16,3 +16,13 @@ class TestDictionary(unittest.TestCase):
 
         d = solver.Dictionary('h?t')
         self.assertEqual(len(d.matching_words) > 2, True)
+
+    def test_guess(self):
+        d = solver.Dictionary('guess')
+        self.assertEqual(d.predictions, [])
+
+        d = solver.Dictionary('t?st')
+        self.assertEqual(d.predictions[0][0], 'e')
+
+        d = solver.Dictionary('?ueen')
+        self.assertEqual(d.predictions[0][0], 'q')
