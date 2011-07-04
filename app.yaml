@@ -1,0 +1,16 @@
+application: loosenoose42
+version: 1
+runtime: python
+api_version: 1
+
+builtins:
+
+handlers:
+- url: /favicon.ico
+  static_files: favicon.ico
+  upload: favicon.ico
+  secure: always
+
+- url: /.*
+  script: app.py
+  secure: always
