@@ -26,3 +26,9 @@ class TestDictionary(unittest.TestCase):
 
         d = solver.Dictionary('?ueen')
         self.assertEqual(d.predictions[0][0], 'q')
+
+    def test_empty(self):
+        d = solver.Dictionary('?')
+        self.assertEqual(d.predictions[0][1], 1./26.)
+        d = solver.Dictionary('??')
+        d = solver.Dictionary('???')

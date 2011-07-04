@@ -3,6 +3,21 @@
 <title>Loosenoose - A hangman solver</title>
 </head>
 <body>
-Hello
-<!-- hhmts start -->Last modified: Mon Jul  4 12:53:41 EST 2011 <!-- hhmts end -->
+
+<form action="." method="get" id="myform" name="myform">
+<input type="text" name="word" id="word" value="{{ word }}"></input>
+<input type="submit" value="Guess"/>
+</form>
+
+<script type="text/javascript">
+document.myform.word.focus();
+</script>
+
+<table>
+{% for letter,pred,fontsize,prob_fontsize in predictions %}
+  <tr> <td> <div style="font-size: {{ fontsize }}px">{{ letter }}</div> </td>
+<td><div style="font-size: {{prob_fontsize}}px"> {{ pred|floatformat:3 }} </div></td></tr>
+{% endfor %}
+</table>
+
 </body> </html>

@@ -34,7 +34,10 @@ class Dictionary():
     def _match_words(self):
         """Iterate through the word list and find any words that match."""
         existing_letters = set(self.word); existing_letters.discard('?');
-        not_existing_letters = '[^' + ''.join(existing_letters) + ']'
+        if len(existing_letters) > 0:
+            not_existing_letters = '[^' + ''.join(existing_letters) + ']'
+        else:
+            not_existing_letters = '[a-z]'
         reobj = re.compile(self.word.replace('?', not_existing_letters))
         self.matching_words = filter(lambda s: reobj.match(s) != None, self.word_list)
 
@@ -58,5 +61,5 @@ class Dictionary():
         # self.predictions is now an ordered list of tuples from most to least likely.
         # ('letter', number).
         # Normalize number of occurences to a fraction.
-        self.predictions = map(lambda x: (x[0], float(x[1]/len(self.matching_words))),
+        self.predictions = map(lambda x: (x[0], float(x[1])/float(len(self.matching_words))),
                                           self.predictions)
