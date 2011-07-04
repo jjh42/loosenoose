@@ -9,8 +9,8 @@ handlers:
 - url: /favicon.ico
   static_files: favicon.ico
   upload: favicon.ico
-  secure: always
+  secure: optional
 
 - url: /.*
   script: app.py
-  secure: always
+  secure: optional
